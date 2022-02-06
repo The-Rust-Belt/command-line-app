@@ -1,12 +1,12 @@
 
-use lazy_static::lazy_static;
 use rand::Rng;
 use regex::Regex;
+use serde::{Serialize, Deserialize};
 use std::{io, thread, time};
 
 // --------------------------------------------------------
 
-// ==========================
+// ========================== Random Message
 fn random_message() {
     let message_array = [
         "Live and Let Die",
@@ -22,7 +22,7 @@ fn random_message() {
     println!("----------------------------------------------\n\n")
 }
 
-// ==========================
+// ========================== Count Down
 fn countdown() {
     let mut x = 5;
     while x > 0 {
@@ -37,7 +37,7 @@ fn countdown() {
     println!("========\n");
 }
 
-// ==========================
+// ========================== Login
 fn login() {
 
     let email_ref: Regex = Regex::new(r"[A-Za-z0-9\.]*@[A-Za-z0-9]*\.[A-Za-z0-9]*").unwrap();
@@ -58,7 +58,7 @@ fn login() {
     println!("\nLogin successful!")
 }
 
-// ==========================
+// ========================== Snake
 fn snake_render(pattern: &str) {
     thread::sleep(time::Duration::from_millis(50));
     println!("{}", pattern);
@@ -92,40 +92,31 @@ fn snake() {
     snake_render(" \\    /");
     snake_render("    |");
     snake_render("    |");
-
-
 }
 
-// ==========================
-// TODO: Null
-struct Node {
-    val: i32,
-    // prev: Node,
+// ========================== JSON Serializing
+#[derive(Serialize, Deserialize, Debug)]
+struct Student {
+    first_name: String,
+    last_name: String,
+    project_title: String,
 }
 
-fn traverse(current_node: Node) {
-
-}
-
-fn linked_list() {
-    // let head: Node = Node {
-    //     val: 1
-    // };
-    // for n in 2..10 {
-    //
-    // }
-}
-
-// ==========================
-// TODO: Getters and Setters
-fn race() {
-    //
-}
-
-// ==========================
-// TODO: JSON
 fn json() {
-    //
+
+    let test_student = Student {
+        first_name: String::from("Gregory"),
+        last_name: String::from("Testerson"),
+        project_title: String::from("The Test Project"),
+    };
+
+    // Convert to JSON and print:
+    let serialized_student = serde_json::to_string(&test_student).unwrap();
+    println!("\n\nSerialized into JSON object:\n\n{}", serialized_student);
+
+    // Convert back to Rust instance:
+    let deserialized_student: Student = serde_json::from_str(&serialized_student).unwrap();
+    println!("\n\nDeserialized back into Rust object:\n\n{}", deserialized_student.first_name);
 }
 
 
@@ -200,5 +191,5 @@ fn graceful_shutdown() {
 fn main() {
     // launch();
     // graceful_shutdown();
-    login();
+    json();
 }
