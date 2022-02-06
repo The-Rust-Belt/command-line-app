@@ -90,8 +90,7 @@ fn snake() {
     snake_render(" |    |");
     snake_render("| o  o |");
     snake_render(" \\    /");
-    snake_render("    |");
-    snake_render("    |");
+    snake_render("    |\n");
 }
 
 // ========================== JSON Serializing
@@ -156,18 +155,6 @@ fn launch() {
                 snake();
                 println!("Type quit to quit");
             },
-            "linkedlist" => {
-                println!("Launching Linked List...");
-                thread::sleep(time::Duration::from_secs(2));
-                linked_list();
-                println!("Type quit to quit");
-            },
-            "race" => {
-                println!("Launching Race...");
-                thread::sleep(time::Duration::from_secs(2));
-                race();
-                println!("Type quit to quit");
-            },
             "json" => {
                 println!("Launching JSON...");
                 thread::sleep(time::Duration::from_secs(2));
@@ -189,7 +176,6 @@ fn graceful_shutdown() {
 // --------------------------------------------------------
 
 fn main() {
-    // launch();
-    // graceful_shutdown();
-    json();
+    launch();
+    graceful_shutdown();
 }
