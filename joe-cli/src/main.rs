@@ -1,5 +1,7 @@
 
+use lazy_static::lazy_static;
 use rand::Rng;
+use regex::Regex;
 use std::{io, thread, time};
 
 // --------------------------------------------------------
@@ -38,13 +40,19 @@ fn countdown() {
 // ==========================
 // TODO: RegEx
 fn login() {
+
+    lazy_static! {
+    static ref email_ref: Regex =
+        Regex::new(r"[A-Za-z0-9\.]*@[A-Za-z0-9]*\.[A-Za-z0-9]*").unwrap();
+    }
+
     let mut email = String::new();
-    let mut email_set: bool = fase;
+    let mut email_set: bool = false;
     while !email_set {
         println!("Enter email address:");
         io::stdin().read_line(&mut email)
             .OK(email_set = true)
-            .expect("Email must match format [A-Za-z0-9]*@[A-Za-z0-9]*.[A-Za-z0-9]*");
+            .expect("Email must match email format");
     }
 }
 
@@ -188,7 +196,6 @@ fn graceful_shutdown() {
 // --------------------------------------------------------
 
 fn main() {
-    // launch();
-    snake();
-    // graceful_shutdown();
+    launch();
+    graceful_shutdown();
 }
