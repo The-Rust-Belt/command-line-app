@@ -1,32 +1,119 @@
 
+use rand::Rng;
 use std::{io, thread, time};
 
 // --------------------------------------------------------
 
+// ==========================
 fn random_message() {
-    //
+    let message_array = [
+        "Live and Let Die",
+        "Band on the Run",
+        "Maybe I'm Amazed",
+        "While My Guitar Gently Weeps",
+        "Let it Be"
+    ];
+    let random_index = rand::thread_rng()
+        .gen_range(0, message_array.len() - 1);
+    println!("\n\n----------------------------------------------");
+    println!("\n{}\n", message_array[random_index]);
+    println!("----------------------------------------------\n\n")
 }
 
+// ==========================
 fn countdown() {
-    //
+    let mut x = 5;
+    while x > 0 {
+        println!("\n===");
+        println!(" {} ", x);
+        println!("===\n");
+        thread::sleep(time::Duration::from_secs(1));
+        x = x - 1;
+    }
+    println!("\n========");
+    println!("Launch!!");
+    println!("========\n");
 }
 
+// ==========================
+// TODO: RegEx
 fn login() {
-    //
+    let mut email = String::new();
+    let mut email_set: bool = fase;
+    while !email_set {
+        println!("Enter email address:");
+        io::stdin().read_line(&mut email)
+            .OK(email_set = true)
+            .expect("Email must match format [A-Za-z0-9]*@[A-Za-z0-9]*.[A-Za-z0-9]*");
+    }
+}
+
+// ==========================
+fn snake_render(pattern: &str) {
+    thread::sleep(time::Duration::from_millis(50));
+    println!("{}", pattern);
+
 }
 
 fn snake() {
-    //
+    snake_render("Let's print a snake!");
+    thread::sleep(time::Duration::from_secs(1));
+    snake_render("\n\n");
+    snake_render("       ^");
+    snake_render("       \\\\");
+    snake_render("        \\ \\");
+    snake_render("        | |");
+    snake_render("        | |");
+    snake_render("        / /");
+    snake_render("       / /");
+    snake_render("      / /");
+    snake_render("     | |");
+    snake_render("     | |");
+    snake_render("     | |");
+    snake_render("    / /");
+    snake_render("   / /");
+    snake_render("  | |");
+    snake_render("  | |");
+    snake_render("  / \\");
+    snake_render(" /   \\");
+    snake_render(" |    |");
+    snake_render(" |    |");
+    snake_render("| o  o |");
+    snake_render(" \\    /");
+    snake_render("    |");
+    snake_render("    |");
+
+
+}
+
+// ==========================
+// TODO: Null
+struct Node {
+    val: i32,
+    prev: Node,
+}
+
+fn traverse(current_node: Node) {
+
 }
 
 fn linked_list() {
-    //
+    let head: Node = Node {
+        val: 1
+    };
+    for n in 2..10 {
+
+    }
 }
 
+// ==========================
+// TODO: Getters and Setters
 fn race() {
     //
 }
 
+// ==========================
+// TODO: JSON
 fn json() {
     //
 }
@@ -48,47 +135,47 @@ fn launch() {
                 println!("Launching Random Message Generator...");
                 thread::sleep(time::Duration::from_secs(2));
                 random_message();
-                break;
+                println!("Type quit to quit");
             },
             "countdown" => {
                 println!("Launching Count Down...");
                 thread::sleep(time::Duration::from_secs(2));
                 countdown();
-                break;
+                println!("Type quit to quit");
             },
             "login" => {
                 println!("Launching Login...");
                 thread::sleep(time::Duration::from_secs(2));
                 login();
-                break;
+                println!("Type quit to quit");
             },
             "snake" => {
                 println!("Launching Snake...");
                 thread::sleep(time::Duration::from_secs(2));
                 snake();
-                break;
+                println!("Type quit to quit");
             },
             "linkedlist" => {
                 println!("Launching Linked List...");
                 thread::sleep(time::Duration::from_secs(2));
                 linked_list();
-                break;
+                println!("Type quit to quit");
             },
             "race" => {
                 println!("Launching Race...");
                 thread::sleep(time::Duration::from_secs(2));
                 race();
-                break;
+                println!("Type quit to quit");
             },
             "json" => {
                 println!("Launching JSON...");
                 thread::sleep(time::Duration::from_secs(2));
                 json();
-                break;
+                println!("Type quit to quit");
             },
+            "quit" => break,
             _ => {
                 println!("Not a valid command. Try again.");
-                thread::sleep(time::Duration::from_secs(2));
             }
         }
     }
@@ -101,6 +188,7 @@ fn graceful_shutdown() {
 // --------------------------------------------------------
 
 fn main() {
-    launch();
-    graceful_shutdown();
+    // launch();
+    snake();
+    // graceful_shutdown();
 }
