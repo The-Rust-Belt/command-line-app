@@ -38,22 +38,24 @@ fn countdown() {
 }
 
 // ==========================
-// TODO: RegEx
 fn login() {
 
-    lazy_static! {
-    static ref email_ref: Regex =
-        Regex::new(r"[A-Za-z0-9\.]*@[A-Za-z0-9]*\.[A-Za-z0-9]*").unwrap();
-    }
-
+    let email_ref: Regex = Regex::new(r"[A-Za-z0-9\.]*@[A-Za-z0-9]*\.[A-Za-z0-9]*").unwrap();
     let mut email = String::new();
-    let mut email_set: bool = false;
-    while !email_set {
-        println!("Enter email address:");
-        io::stdin().read_line(&mut email)
-            .OK(email_set = true)
-            .expect("Email must match email format");
+    let mut email_format_correct: bool = false;
+    while !email_format_correct {
+        println!("\nEnter email address:");
+        io::stdin().read_line(&mut email);
+        if email_ref.is_match(&email) {
+            email_format_correct = true;
+        } else {
+            println!("\nIncorrect email format! Try again.")
+        };
     }
+    let mut password = String::new();
+    println!("\nEnter password:");
+    io::stdin().read_line(&mut password);
+    println!("\nLogin successful!")
 }
 
 // ==========================
@@ -98,7 +100,7 @@ fn snake() {
 // TODO: Null
 struct Node {
     val: i32,
-    prev: Node,
+    // prev: Node,
 }
 
 fn traverse(current_node: Node) {
@@ -106,12 +108,12 @@ fn traverse(current_node: Node) {
 }
 
 fn linked_list() {
-    let head: Node = Node {
-        val: 1
-    };
-    for n in 2..10 {
-
-    }
+    // let head: Node = Node {
+    //     val: 1
+    // };
+    // for n in 2..10 {
+    //
+    // }
 }
 
 // ==========================
@@ -196,6 +198,7 @@ fn graceful_shutdown() {
 // --------------------------------------------------------
 
 fn main() {
-    launch();
-    graceful_shutdown();
+    // launch();
+    // graceful_shutdown();
+    login();
 }
